@@ -1,16 +1,21 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
 import { firebaseRegisterEmailAndPassword } from "../firebaseAuth";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { firestoreAddData } from "../firebaseDb";
+import { UserContext } from "../context/UserContext";
 // import { onAuthStateChanged, signOut } from "firebase/auth";
 
 interface RegisterScreenProps {}
 
 const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
   const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { setUserId } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -24,6 +29,14 @@ const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
       toast.success("Signed Up Successfully", {
         duration: 2000,
       });
+      const user: User = {
+        email,
+        name,
+        userId: response.user.uid,
+        friends: ["shubharthi", "aritra", "momo", "girish"],
+      };
+      await firestoreAddData(user);
+      setUserId(user.userId);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -48,6 +61,13 @@ const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="block w-full border-2 border-gray-100 py-4 px-2 rounded-lg my-5"
+          />
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="block w-full border-2 border-gray-100 py-4 px-2 rounded-lg my-5"
           />
           <input
