@@ -12,6 +12,7 @@ import Provider from "./components/Provider.tsx";
 import Dashboard from "./screens/Dashboard.tsx";
 import RegisterScreen from "./screens/RegisterScreen.tsx";
 import LoginScreen from "./screens/LoginScreen.tsx";
+import UserProvider from "./context/UserContext.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,9 +25,11 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Provider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </Provider>
+  <UserProvider>
+    <Provider>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </Provider>
+  </UserProvider>
 );
