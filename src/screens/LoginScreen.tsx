@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import { Loader2 } from "lucide-react";
 import { firebaseSignInEmailAndPassword } from "../firebaseAuth";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,8 @@ const LoginScreen: FC<LoginScreenProps> = ({}) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const { setUserId } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -23,6 +26,7 @@ const LoginScreen: FC<LoginScreenProps> = ({}) => {
       toast.success("Logged In Succesfully", {
         duration: 2000,
       });
+      setUserId(res.user.uid);
     } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);
