@@ -4,3 +4,13 @@ interface User {
   email: string;
   friends: string[];
 }
+
+interface SearchType {
+  userId: string;
+  found: boolean;
+}
+
+interface FriendType {
+  friendId: string;
+  friendName: string;
+}
