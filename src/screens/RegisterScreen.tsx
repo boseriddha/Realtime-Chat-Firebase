@@ -1,4 +1,4 @@
-import { FC, useState, useContext } from "react";
+import { FC, useState, useContext, useEffect } from "react";
 import { firebaseRegisterEmailAndPassword } from "../firebaseAuth";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +15,14 @@ const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { setUserId } = useContext(UserContext);
+  const { setFriendId, setUserId } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setFriendId(null);
+    setUserId(null);
+  }, []);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
