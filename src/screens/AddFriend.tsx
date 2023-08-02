@@ -7,6 +7,7 @@ import {
 } from "../firebaseDb";
 import { toast } from "react-hot-toast";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 interface AddFriendProps {}
 
@@ -14,6 +15,7 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
   const [email, setEmail] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userId } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,6 +50,10 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
     }
   };
 
+  const GoBack = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <div className="grid grid-cols-12 text-xl">
@@ -73,6 +79,12 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
             </button>
           )}
         </form>
+        <button
+          className="rounded-full bg-indigo-500 text-white text-center px-4 py-2 my-2 col-start-5 col-span-4"
+          onClick={GoBack}
+        >
+          Go Back To Dashboard
+        </button>
       </div>
     </>
   );
