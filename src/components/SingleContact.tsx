@@ -11,6 +11,7 @@ const SingleContact: FC<SingleContactProps> = ({ name, id }) => {
 
   const clickHandler = () => {
     setFriendId(id);
+    window.location.reload();
   };
 
   return (
