@@ -1,7 +1,7 @@
 import { FC, useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { io } from "socket.io-client";
-import { v4 as uuidv4 } from "uuid";
+import MessageComponent from "./MessageComponent";
 
 interface ChatComponentProps {
   room: string;
@@ -80,11 +80,12 @@ const ChatComponent: FC<ChatComponentProps> = ({ room }) => {
     <div className="col-span-9 bg-indigo-100 my-2 rounded-md flex flex-col justify-end lg:text-3xl md:text-2xl sm:text-xl">
       <div>
         <ul>
-          {messages.map((message) => (
+          {/* {messages.map((message) => (
             <li key={uuidv4()} className="block">
               {message.text}
             </li>
-          ))}
+          ))} */}
+          <MessageComponent messages={messages} />
         </ul>
       </div>
       <form onSubmit={sendMessage}>
