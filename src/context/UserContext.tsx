@@ -6,9 +6,9 @@ interface UserContextProps {
 
 interface userData {
   userId: string | null;
-  setUserId(userId: string): void;
+  setUserId(userId: string | null): void;
   friendId: string | null;
-  setFriendId(friendId: string): void;
+  setFriendId(friendId: string | null): void;
 }
 
 const initUserData: userData = {
@@ -41,10 +41,18 @@ const UserProvider: FC<UserContextProps> = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("userId", JSON.stringify(userId));
+
+    return () => {
+      localStorage.removeItem("userId");
+    };
   }, [userId]);
 
   useEffect(() => {
     localStorage.setItem("friendId", JSON.stringify(friendId));
+
+    return () => {
+      localStorage.removeItem("friendId");
+    };
   }, [friendId]);
 
   return (
