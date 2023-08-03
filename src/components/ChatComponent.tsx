@@ -18,7 +18,7 @@ const ChatComponent: FC<ChatComponentProps> = ({ room }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [users, setUsers] = useState<string[]>([]);
   const { userId, friendId } = useContext(UserContext);
-  const ENDPOINT = "http://localhost:8000/";
+  const ENDPOINT = "chat-app-backend-production-0bb8.up.railway.app";
 
   const socket = io(ENDPOINT);
 
