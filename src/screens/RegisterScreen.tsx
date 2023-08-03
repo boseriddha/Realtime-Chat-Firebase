@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { firestoreAddData } from "../firebaseDb";
 import { UserContext } from "../context/UserContext";
-// import { onAuthStateChanged, signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 interface RegisterScreenProps {}
 
@@ -38,7 +38,7 @@ const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
         email,
         name,
         userId: response.user.uid,
-        friends: ["shubharthi", "aritra", "momo", "girish"],
+        friends: [],
       };
       await firestoreAddData(user);
       setUserId(user.userId);
@@ -57,6 +57,9 @@ const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
   return (
     <>
       <div className="grid grid-cols-12 text-xl">
+        <h1 className="bold text-3xl my-4 col-span-full text-center">
+          Realtime Chat Application
+        </h1>
         <form
           className="col-start-5 col-span-4 flex flex-col items-center"
           onSubmit={submitHandler}
@@ -93,6 +96,12 @@ const RegisterScreen: FC<RegisterScreenProps> = ({}) => {
             </button>
           )}
         </form>
+        <p className="col-span-full text-center mt-4">
+          Already a user?
+          <Link to={"/login"} className="hover:underline ml-2">
+            Login
+          </Link>
+        </p>
       </div>
     </>
   );

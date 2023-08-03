@@ -2,7 +2,7 @@ import { FC, useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { Loader2 } from "lucide-react";
 import { firebaseSignInEmailAndPassword } from "../firebaseAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 interface LoginScreenProps {}
@@ -46,6 +46,9 @@ const LoginScreen: FC<LoginScreenProps> = ({}) => {
   return (
     <>
       <div className="grid grid-cols-12 text-xl">
+        <h1 className="bold text-3xl my-4 col-span-full text-center">
+          Realtime Chat Application
+        </h1>
         <form
           className="col-start-5 col-span-4 flex flex-col items-center"
           onSubmit={loginHandler}
@@ -75,6 +78,12 @@ const LoginScreen: FC<LoginScreenProps> = ({}) => {
             </button>
           )}
         </form>
+        <p className="col-span-full text-center mt-4">
+          Not a user?
+          <Link to={"/register"} className="hover:underline ml-2">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </>
   );
