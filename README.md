@@ -2,7 +2,7 @@
 
 This is a prototype chat application which enables users to communicate in real time. Users can register, make friends using their emails, and then chat. No records of the chats are kept. Upon completion of their chat, they can leave.
 
-[Link To Live Website](br-realtime-chat-app.netlify.app)
+[Link To Live Website](https://br-realtime-chat-app.netlify.app)
 
 ## Guidelines for local testing
 
